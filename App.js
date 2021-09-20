@@ -10,8 +10,11 @@ import React from 'react';
 import type {Node} from 'react';
 import {
   Button,
+  UIManager,
+  NativeModules,
   requireNativeComponent,
   SafeAreaView,
+  findNodeHandle,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -27,46 +30,29 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import EmojiTextField from './EmojiTextFields';
 
-const EditText = requireNativeComponent('EmojiKeyboard');
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-};
+const ref = React.createRef();
 
+const {CustomNative, EmojiKeyboard} = NativeModules;
 const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
-
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const toggleKeyboard = () => {
+    UIManager.dispatchViewManagerCommand(
+      findNodeHandle(ref.current),
+      UIManager.EmojiKeyboard.Commands.toggleKeyboard,
+      [],
+    );
+  };
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <EditText style={{ width: 100, height: 100}}/>
-      <Button title={"Press me"} onPress={()=>EditText.toggleKeyboard()}></Button>
+      <EmojiTextField ref={ref} />
+      <Button title={'Open kb'} onPress={toggleKeyboard} />
     </SafeAreaView>
   );
 };

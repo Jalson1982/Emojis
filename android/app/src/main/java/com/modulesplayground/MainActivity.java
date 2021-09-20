@@ -1,6 +1,12 @@
 package com.modulesplayground;
 
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+
 import com.facebook.react.ReactActivity;
+import com.vanniktech.emoji.EmojiEditText;
+import com.vanniktech.emoji.EmojiPopup;
 
 public class MainActivity extends ReactActivity {
 
