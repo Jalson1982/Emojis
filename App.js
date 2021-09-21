@@ -39,6 +39,8 @@ const App: () => Node = () => {
   const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    flex: 1,
+    alignItems: 'center'
   };
 
   const toggleKeyboard = () => {
@@ -48,11 +50,11 @@ const App: () => Node = () => {
       [],
     );
   };
+  
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <EmojiTextField ref={ref} />
-      <Button title={'Open kb'} onPress={toggleKeyboard} />
     </SafeAreaView>
   );
 };

@@ -194,7 +194,8 @@ dependencies {
         exclude group:'com.facebook.flipper'
         exclude group:'com.squareup.okhttp3', module:'okhttp'
     }
-
+    implementation 'com.vdurmont:emoji-java:5.1.1'
+    implementation "androidx.constraintlayout:constraintlayout:2.1.0"
     debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.flipper'
     }
